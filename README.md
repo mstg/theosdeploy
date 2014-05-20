@@ -7,7 +7,6 @@ Features
 * Remote deploy
 * Multiple devices
 * Compile on the go
-* Logs
 
 What you need on your iOS device
 =============
