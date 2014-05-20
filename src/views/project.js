@@ -26,19 +26,10 @@ var fs = require('fs'),
 
 module.exports = function(app) {
     app.get('/project/:project_name', function (req, res) {
-        var path = config["config"]["projects_path"] + req.param('project_name') + '/makefile.js';
-        project = require(path);
-
-        var tempName = require.resolve(path);
-        delete require.cache[tempName];
-
-        project = require(path);
-
         var tempPath = "/build/" + req.param('project_name');
         devices.device(function(){
             res.render('project', {
                 page_name : 'Project',
-                project : project.makefile,
                 path : tempPath,
                 devices : devices.devices
             });
