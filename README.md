@@ -25,7 +25,12 @@ What you need on your computer
 
 Usage
 =====
+```
+$ npm install
+```
+
 Add ssh key for passwordless login
+
 Add your project to projects folder
 
 Create a makefile.js with following template in the project root
