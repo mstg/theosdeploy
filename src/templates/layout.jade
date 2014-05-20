@@ -1,0 +1,33 @@
+doctype html
+html
+    head
+        title Theos Deploy - #{page_name}
+        link(rel='stylesheet', href='/public/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/public/css/sb-admin.min.css')
+        link(rel='stylesheet', href='/public/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/public/css/theosdeploy.css')
+    body
+        div(id='wrapper')
+            nav.navbar.navbar-default.navbar-fixed-top(role='navigation', style='margin-bottom: 0;')
+                .navbar-header
+                    button.navbar-toggle(type='button', data-toggle='collapse', data-target='.sidebar-collapse')
+                    span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='/') Theos Deploy
+                .navbar-default.navbar-static-side(role='navigation')
+                    .sidebar-collapse
+                        ul#side-menu.nav
+                            li
+                                a(href='/')
+                                    i.fa.fa-dashboard.fa-fw
+                                    | Home
+            div#page-wrapper
+                block page
+
+        script(src='/public/js/jquery-1.10.2.js')
+        script(src='/public/js/bootstrap.min.js')
+        script(src='/public/js/sb-admin.min.js')
+        script(src='//localhost:5050/socket.io/socket.io.js')
+        script(src='/public/js/theosdeploy.js')

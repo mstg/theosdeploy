@@ -1,0 +1,10 @@
+extend layout
+block page
+    div.row
+        div.col-lg-12
+            h1.page-header
+                | #{page_name} #{project_name}
+    div.row
+        textarea.form-control(rows=50,disabled)#ssh-log
+    script
+        | var isBuildPage = true;
