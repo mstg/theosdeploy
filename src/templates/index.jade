@@ -42,7 +42,7 @@ block page
                     div.list-group
                         if devices_num != 0
                             each device in devices
-                                a.list-group-item(href='/device/#{device}')
+                                a.list-group-item(href='javascript:void(0)')
                                     i.fa.fa-tasks.fa-fw
                                     | #{device}
                         else
