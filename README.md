@@ -65,3 +65,9 @@ exports.device = {
 }
 ```
 All required
+
+To start the server:
+```
+$ cd src
+$ node site.js
+```
