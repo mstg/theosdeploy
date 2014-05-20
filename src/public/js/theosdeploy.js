@@ -4,10 +4,16 @@ $(".deploybtn").attr("disabled", true);
 $("li.device").click(function() {
     var previous = $(this).closest(".list-group").children(".active-device");
     previous.removeClass('active-device');
+    $("#install").attr('checked', false);
 
     $(this).addClass('active-device');
-    $(".deploybtn").attr('href', tmp + '/' + $(this).text());
+    $(".deploybtn").attr('href', tmp + '/' + $(this).text() + "/no");
     $(".deploybtn").attr("disabled", false);
+    $("#install").attr('disabled', false);
+});
+
+$("#install").on('change', function() {
+    $(".deploybtn").attr('href', $(".deploybtn").attr('href').replace('no', 'yes'));
 });
 
 if (isBuildPage) {

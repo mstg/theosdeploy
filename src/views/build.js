@@ -28,7 +28,7 @@ var io = require('socket.io').listen(5050),
     ssh = new ssh_module();
 
 module.exports = function(app) {
-    app.get('/build/:project/:device', function (req, res) {
+    app.get('/build/:project/:device/:install', function (req, res) {
         var device = require(config["config"]["devices_path"] + "/" + req.param('device') + "/device.js"),
             project_path = path.normalize(config["config"]["projects_path"] + "/" + req.param('project')),
             on_device_project_path = device.device["device_project_path"] + "/" + req.param('project');
@@ -52,7 +52,7 @@ module.exports = function(app) {
                     exec("cd " + project_path + " & " + rsync_query, function(err, stdout, stderr) {
                         socket.emit('ssh', { response: "Project moved to device" });
 
-                        ssh.exec("ln -s /var/theos " + on_device_project_path + "/theos", function(err, stream) {
+                        ssh.exec("ln -s /var/theos " + on_device_project_path + "/theos && chmod 755 " + on_device_project_path + " -R", function(err, stream) {
 
                             ssh.exec("cd " + on_device_project_path + " && make package", function(err, stream) {
                                 stream.on('data', function(data, extended) {
@@ -69,9 +69,21 @@ module.exports = function(app) {
                                         exec("cd " + project_path + " & " + rsync_query, function(err, stdout, stderr) {
                                             socket.emit('ssh', { response: "Package moved to project root. " + project_path });
 
-                                            ssh.exec("rm -rf " + on_device_project_path, function(err, stream) {
-                                                socket.emit('ssh', { response: "Deleted project from device" });
-                                            });
+                                            if (req.param('install') == "yes") {
+                                                ssh.exec("cd " + on_device_project_path + " && make install", function(err, stream) {
+                                                    socket.emit('ssh', { response: "Installed package" });
+
+                                                    setTimeout(function() {
+                                                        ssh.exec("rm -rf " + on_device_project_path, function(err, stream) {
+                                                            socket.emit('ssh', { response: "Deleted project from device" });
+                                                        });
+                                                    }, 5000);
+                                                });
+                                            } else {
+                                                ssh.exec("rm -rf " + on_device_project_path, function(err, stream) {
+                                                    socket.emit('ssh', { response: "Deleted project from device" });
+                                                });
+                                            }
                                         });
                                     }
                                 });
