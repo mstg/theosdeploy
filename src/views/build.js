@@ -41,7 +41,6 @@ module.exports = function(app) {
                     fs.unlinkSync(project_path + "/theos");
                     socket.emit('ssh', { response: "Deleted old theos symlink for project" });
                 }
-                socket.emit('ssh', { response: "Created Makefile from converted Makefile.js" });
 
                 ssh.exec("rm -rf " + on_device_project_path, function(err, stream) {
                     socket.emit('ssh', { response: "Deleted folder " + on_device_project_path + ", if exists" });
