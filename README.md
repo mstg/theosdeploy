@@ -47,6 +47,17 @@ exports.device = {
 ```
 All required
 
+If you have subprojects, change this in the Makefile for the subproject:
+```
+include theos/makefiles/common.mk
+```
+
+to
+
+```
+include ../theos/makefiles/common.mk
+```
+
 To start the server:
 ```
 $ cd src
