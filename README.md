@@ -7,7 +7,6 @@ Features
 * Remote deploy
 * Multiple devices
 * Compile on the go
-* Logs
 
 What you need on your iOS device
 =============
@@ -33,24 +32,6 @@ Add ssh key for passwordless login
 
 Add your project to projects folder
 
-Create a makefile.js with following template in the project root
-```javascript
-exports.makefile = {
-    type: "tweak" (tweak, bundle, library or the correct type also from the *_NAME) (REQUIRED),
-    name: "test" (REQUIRED),
-    frameworks: new Array('UIKit') (OPTIONAL),
-    private_frameworks: new Array('preferences') (OPTIONAL),
-    after_install: "killall -9 SpringBoard" (OPTIONAL),
-    archs: new Array('armv7', 'arm64') (REQUIRED),
-    target: "iphone:latest:7.0" (REQUIRED),
-    files: new Array('Tweak.xm') (REQUIRED),
-    package_version: "1.0" (OPTIONAL),
-    subprojects: new Array('Prefs') (OPTIONAL),
-    install_path: "/Library/PreferenceBundles" (OPTIONAL),
-    internal_stage: "" (OPTIONAL)
-}
-```
-
 Create a folder with device's name in the devices folder
 
 Create device.js file in your device folder
@@ -65,3 +46,9 @@ exports.device = {
 }
 ```
 All required
+
+To start the server:
+```
+$ cd src
+$ node site.js
+```
