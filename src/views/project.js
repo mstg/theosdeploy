@@ -30,6 +30,7 @@ module.exports = function(app) {
         devices.device(function(){
             res.render('project', {
                 page_name : 'Project',
+                project_name : req.param('project_name'),
                 path : tempPath,
                 devices : devices.devices
             });
