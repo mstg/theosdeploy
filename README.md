@@ -2,6 +2,11 @@ theosdeploy
 ===========
 Deploy source code to your device, compile, download the package, delete from device
 
+Known issues
+============
+* ECONNRESET at random times, refresh to fix this
+    * This will be fixed ASAP
+
 Features
 ========
 * Remote deploy
